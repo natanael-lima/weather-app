@@ -1,5 +1,5 @@
-const API_URL = process.env.API_URL as string;
-const API_KEY = process.env.API_KEY as string;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
+const apiKey = process.env.NEXT_PUBLIC_API_KEY as string;
 
 export interface WeatherDTO {
     id: number;
@@ -31,7 +31,10 @@ export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> =>
     
 
     try {
-        const response = await fetch(`${API_URL}?q=${cityName}&appid=${API_KEY}&units=metric`);
+        console.log('API_URL:', apiUrl);
+        console.log('API_KEY:', apiKey);
+
+        const response = await fetch(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`);
 
          // Log the response URL and status
          console.log('Response URL:', response.url);
@@ -44,7 +47,7 @@ export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> =>
              console.error('Received HTML response:', text);
              throw new Error('Received HTML response, expected JSON');
          }
-         
+
         if (!response.ok) {
             const errorDetails = await response.json();
             throw new Error(errorDetails.message || 'Failed to fetch weather data');
