@@ -18,6 +18,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { GiWaterDrop } from "react-icons/gi";
 import { useState, useEffect } from 'react';
 import { getWeatherByCity, WeatherDTO } from '../api/weatherService';
+import Footer from '@/components/Footer';
 
 // Definir los posibles tipos de descripción de clima
 // Definir los posibles tipos de descripción de clima
@@ -131,7 +132,7 @@ export default function Home() {
       <div className="w-full lg:w-3/6 space-y-4">
         <article className="rounded-lg p-6">
           <header className="flex items-center justify-between">
-            <h1 className="text-6xl font-bold text-white">{temperatureInCelsius}°C</h1>
+            <h1 className="text-9xl font-bold text-white">{temperatureInCelsius}°</h1>
               {currentIcon} {/* Icono más grande */}
           </header>
           <p className="text-xl text-white mt-2 capitalize ">{weather.description}</p>
@@ -168,7 +169,7 @@ export default function Home() {
                 {/* Encabezados de columna */}
                 <li className="font-semibold text-white flex justify-center  items-center">Day</li>
                 <li className="font-semibold text-white flex justify-center">Precipitation</li>
-                <li className="font-semibold text-white flex justify-center  items-center">Icons</li>
+                <li className="font-semibold text-white flex justify-center  items-center">Visual</li>
                 <li className="font-semibold text-white flex justify-center  items-center">Temperature</li>
 
                 {/* Datos */}
@@ -195,8 +196,8 @@ export default function Home() {
                       
                       {/* Temperaturas */}
                       <li className="flex justify-center text-white ">
-                        <span className='font-bold'>{Math.round(forecast.tempMax)}°C</span> / 
-                        <span className='font-bold'>{Math.round(forecast.tempMin)}°C</span>
+                        <span className='font-bold mr-2'>{Math.round(forecast.tempMax)}°</span>
+                        <span className='font-bold'>{Math.round(forecast.tempMin)}°</span>
                       </li>
                     </>
                   );
@@ -229,8 +230,11 @@ export default function Home() {
             </li>
           </ul>
         </section>
+        <Footer/>
       </div>
+      
     </section>
+    
 
   );
 }
