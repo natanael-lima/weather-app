@@ -1,5 +1,5 @@
-const API_URL = 'https://api.openweathermap.org/data/2.5/forecast';
-const API_KEY = 'api'; // Reemplaza con tu API key
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export interface WeatherDTO {
     id: number;
