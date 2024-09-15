@@ -32,11 +32,13 @@ export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> =>
 
     try {
 
-
+        console.log('API_URL:', apiUrl);
+        console.log('API_KEY:', apiKey);
+        
         const response = await fetch(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`);
 
          // Log the response URL and status
-         //console.log('Response URL:', response.url);
+         console.log('Response URL:', response.url);
          console.log('Response Status:', response.status);
 
         if (!response.ok) {
