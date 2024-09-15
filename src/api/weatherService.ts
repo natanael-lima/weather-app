@@ -1,5 +1,5 @@
-const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
-const apiKey = process.env.NEXT_PUBLIC_API_KEY as string;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+const apiKey = process.env.API_KEY;
 
 export interface WeatherDTO {
     id: number;
@@ -31,22 +31,13 @@ export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> =>
     
 
     try {
-        console.log('API_URL:', apiUrl);
-        console.log('API_KEY:', apiKey);
+
 
         const response = await fetch(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`);
 
          // Log the response URL and status
-         console.log('Response URL:', response.url);
+         //console.log('Response URL:', response.url);
          console.log('Response Status:', response.status);
-
-         // Check if response is HTML
-         const contentType = response.headers.get('content-type');
-         if (contentType && contentType.includes('text/html')) {
-             const text = await response.text();
-             console.error('Received HTML response:', text);
-             throw new Error('Received HTML response, expected JSON');
-         }
 
         if (!response.ok) {
             const errorDetails = await response.json();
