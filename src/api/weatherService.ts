@@ -1,5 +1,5 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_URL = process.env.API_URL;
+const API_KEY = process.env.API_KEY;
 
 export interface WeatherDTO {
     id: number;
