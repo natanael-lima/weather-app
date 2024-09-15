@@ -3,7 +3,7 @@ const nextConfig = {
     reactStrictMode: true,
     env: {
       NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
-      API_KEY: process.env.AUTH_TOKEN,
+      API_KEY: process.env.API_KEY,
     },
   };
   
