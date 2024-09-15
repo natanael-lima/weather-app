@@ -11,35 +11,29 @@ export interface WeatherDTO {
     feelsLike: number;
     tempMin: number;
     tempMax: number;
-    dailyForecasts: Array<{
-        date: string;
-        tempMin: number;
-        tempMax: number;
-        description: string;
-        cloudCover: number;
-    }>;
+    dailyForecasts: Array<DailyForecast>;
 }
+
 interface DailyForecast {
     date: string;
     tempMin: number;
     tempMax: number;
     description: string;
     cloudCover: number;
+    pop: number; // Añade esta línea
 }
 
 export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> => {
-    
-
     try {
 
-        console.log('API_URL:', apiUrl);
-        console.log('API_KEY:', apiKey);
-        
+        //console.log('API_URL:', apiUrl);
+        //console.log('API_KEY:', apiKey);
+
         const response = await fetch(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`);
 
          // Log the response URL and status
-         console.log('Response URL:', response.url);
-         console.log('Response Status:', response.status);
+         //console.log('Response URL:', response.url);
+         //console.log('Response Status:', response.status);
 
         if (!response.ok) {
             const errorDetails = await response.json();
@@ -68,10 +62,12 @@ const transformToWeatherDTO = (data: any): WeatherDTO => {
                 tempMax: item.main.temp_max,
                 description: item.weather[0].description,
                 cloudCover: item.clouds.all,
+                pop: item.pop || 0, // Añade esta línea para probabilidad de precipitación
             };
         } else {
             forecasts[date].tempMin = Math.min(forecasts[date].tempMin, item.main.temp_min);
             forecasts[date].tempMax = Math.max(forecasts[date].tempMax, item.main.temp_max);
+            forecasts[date].pop = Math.max(forecasts[date].pop, item.pop || 0); // Actualiza probabilidad de precipitación
         }
     });
 
