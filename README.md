@@ -10,7 +10,7 @@ Esta es una aplicación de clima construida con Next.js y Tailwind CSS. Utiliza 
 
 - **Next.js**: Framework para React que permite renderizado del lado del servidor y generación de sitios estáticos.
 - **Tailwind CSS**: Framework de CSS para estilizar la aplicación.
-- **API externa**: Fuente de datos del clima.
+- **API externa**: Fuente de datos del clima Weather API openweathermap.org
 
 ## Instalación
 
