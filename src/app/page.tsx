@@ -3,8 +3,14 @@
 import { useState, useEffect } from 'react';
 import { FaLocationDot } from "react-icons/fa6";
 import { GiWaterDrop } from "react-icons/gi";
+import {IoCloudy, IoWater, } from 'react-icons/io5';
+import { FaWind } from "react-icons/fa6";// para viento
+import { GiStripedSun } from "react-icons/gi";// para UV Index
+import { BsThermometerSun } from "react-icons/bs";
+
 import Footer from '@/components/Footer';
 import { getWeatherByCity, WeatherDTO } from '../api/weatherService';
+import WeatherGif from '../components/WeatherGif';
 import clearSky from '../../public/assets/clear_sky.png'
 import fewClouds from '../../public/assets/few_clouds.png'
 import cloudyWithLightning from '../../public/assets/cloudy_with_lightning.png'
@@ -21,15 +27,6 @@ import thunderstorm from '../../public/assets/thunderstorm.png'
 import windy from '../../public/assets/windy.png'
 import luna from '../../public/assets/luna.png'
 import moon from '../../public/assets/moon.png'
-
-import {
-  IoCloudy, // Nublado
-  IoWater, // Agua para Humedad
-} from 'react-icons/io5';
-import { FaWind } from "react-icons/fa6";// para viento
-import { GiStripedSun } from "react-icons/gi";// para UV Index
-import { BsThermometerSun } from "react-icons/bs";
-import WeatherGif from '../components/WeatherGif';
 import { debugEnvVariables } from '@/api/debugEnvVariables';
 
 
@@ -100,73 +97,73 @@ import { debugEnvVariables } from '@/api/debugEnvVariables';
 // Mapa de íconos usando imágenes
 const iconMaps: { [key in WeatherDescriptions]: JSX.Element } = {
   // Tormentas
-  'thunderstorm with light rain': <img src={thunderstorm.src} alt="Thunderstorm with Light Rain" className="w-5 h-5" />,
-  'thunderstorm with rain': <img src={thunderstorm.src} alt="Thunderstorm with Rain" className="w-5 h-5" />,
-  'thunderstorm with heavy rain': <img src={thunderstorm.src} alt="Thunderstorm with Heavy Rain" className="w-5 h-5" />,
-  'light thunderstorm': <img src={thunderstorm.src} alt="Light Thunderstorm" className="w-5 h-5" />,
-  'thunderstorm': <img src={thunderstorm.src} alt="Thunderstorm" className="w-5 h-5" />,
-  'heavy thunderstorm': <img src={thunderstorm.src} alt="Heavy Thunderstorm" className="w-5 h-5" />,
-  'ragged thunderstorm': <img src={thunderstorm.src} alt="Ragged Thunderstorm" className="w-5 h-5" />,
-  'thunderstorm with light drizzle': <img src={cloudyWithLightning.src} alt="Thunderstorm with Light Drizzle" className="w-5 h-5" />,
-  'thunderstorm with drizzle': <img src={thunderstorm.src} alt="Thunderstorm with Drizzle" className="w-5 h-5" />,
-  'thunderstorm with heavy drizzle': <img src={thunderstorm.src} alt="Thunderstorm with Heavy Drizzle" className="w-5 h-5" />,
+  'thunderstorm with light rain': <img src={thunderstorm.src} alt="Thunderstorm with Light Rain" className="w-6 h-6" />,
+  'thunderstorm with rain': <img src={thunderstorm.src} alt="Thunderstorm with Rain" className="w-6 h-6" />,
+  'thunderstorm with heavy rain': <img src={thunderstorm.src} alt="Thunderstorm with Heavy Rain" className="w-6 h-6" />,
+  'light thunderstorm': <img src={thunderstorm.src} alt="Light Thunderstorm" className="w-6 h-6" />,
+  'thunderstorm': <img src={thunderstorm.src} alt="Thunderstorm" className="w-6 h-6" />,
+  'heavy thunderstorm': <img src={thunderstorm.src} alt="Heavy Thunderstorm" className="w-6 h-6" />,
+  'ragged thunderstorm': <img src={thunderstorm.src} alt="Ragged Thunderstorm" className="w-6 h-6" />,
+  'thunderstorm with light drizzle': <img src={cloudyWithLightning.src} alt="Thunderstorm with Light Drizzle" className="w-6 h-6" />,
+  'thunderstorm with drizzle': <img src={thunderstorm.src} alt="Thunderstorm with Drizzle" className="w-6 h-6" />,
+  'thunderstorm with heavy drizzle': <img src={thunderstorm.src} alt="Thunderstorm with Heavy Drizzle" className="w-6 h-6" />,
 
   // Llovizna
-  'light intensity drizzle': <img src={lightRain.src} alt="Light Intensity Drizzle" className="w-5 h-5" />,
-  'drizzle': <img src={lightRain.src} alt="Drizzle" className="w-5 h-5" />,
-  'heavy intensity drizzle': <img src={lightRain.src} alt="Heavy Intensity Drizzle" className="w-5 h-5" />,
-  'light intensity drizzle rain': <img src={lightRain.src} alt="Light Intensity Drizzle Rain" className="w-5 h-5" />,
-  'drizzle rain': <img src={lightRain.src} alt="Drizzle Rain" className="w-5 h-5" />,
-  'heavy intensity drizzle rain': <img src={heavyRain.src} alt="Heavy Intensity Drizzle Rain" className="w-5 h-5" />,
-  'shower rain and drizzle': <img src={rain.src} alt="Shower Rain and Drizzle" className="w-5 h-5" />,
-  'heavy shower rain and drizzle': <img src={heavyRain.src} alt="Heavy Shower Rain and Drizzle" className="w-5 h-5" />,
-  'shower drizzle': <img src={lightRain.src} alt="Shower Drizzle" className="w-5 h-5" />,
+  'light intensity drizzle': <img src={lightRain.src} alt="Light Intensity Drizzle" className="w-6 h-6" />,
+  'drizzle': <img src={lightRain.src} alt="Drizzle" className="w-6 h-6" />,
+  'heavy intensity drizzle': <img src={lightRain.src} alt="Heavy Intensity Drizzle" className="w-6 h-6" />,
+  'light intensity drizzle rain': <img src={lightRain.src} alt="Light Intensity Drizzle Rain" className="w-6 h-6" />,
+  'drizzle rain': <img src={lightRain.src} alt="Drizzle Rain" className="w-6 h-6" />,
+  'heavy intensity drizzle rain': <img src={heavyRain.src} alt="Heavy Intensity Drizzle Rain" className="w-6 h-6" />,
+  'shower rain and drizzle': <img src={rain.src} alt="Shower Rain and Drizzle" className="w-6 h-6" />,
+  'heavy shower rain and drizzle': <img src={heavyRain.src} alt="Heavy Shower Rain and Drizzle" className="w-6 h-6" />,
+  'shower drizzle': <img src={lightRain.src} alt="Shower Drizzle" className="w-6 h-6" />,
 
   // Lluvia
-  'light rain': <img src={lightRain.src} alt="Light Rain" className="w-5 h-5" />,
-  'moderate rain': <img src={rain.src} alt="Moderate Rain" className="w-5 h-5" />,
-  'heavy intensity rain': <img src={heavyRain.src} alt="Heavy Intensity Rain" className="w-5 h-5" />,
-  'very heavy rain': <img src={heavyRain.src} alt="Very Heavy Rain" className="w-5 h-5" />,
-  'extreme rain': <img src={heavyRain.src} alt="Extreme Rain" className="w-5 h-5" />,
-  'freezing rain': <img src={snow.src} alt="Freezing Rain" className="w-5 h-5" />,
-  'light intensity shower rain': <img src={lightRain.src} alt="Light Intensity Shower Rain" className="w-5 h-5" />,
-  'shower rain': <img src={rain.src} alt="Shower Rain" className="w-5 h-5" />,
-  'heavy intensity shower rain': <img src={heavyRain.src} alt="Heavy Intensity Shower Rain" className="w-5 h-5" />,
-  'ragged shower rain': <img src={rain.src} alt="Ragged Shower Rain" className="w-5 h-5" />,
+  'light rain': <img src={lightRain.src} alt="Light Rain" className="w-6 h-6" />,
+  'moderate rain': <img src={rain.src} alt="Moderate Rain" className="w-6 h-6" />,
+  'heavy intensity rain': <img src={heavyRain.src} alt="Heavy Intensity Rain" className="w-6 h-6" />,
+  'very heavy rain': <img src={heavyRain.src} alt="Very Heavy Rain" className="w-6 h-6" />,
+  'extreme rain': <img src={heavyRain.src} alt="Extreme Rain" className="w-6 h-6" />,
+  'freezing rain': <img src={snow.src} alt="Freezing Rain" className="w-6 h-6" />,
+  'light intensity shower rain': <img src={lightRain.src} alt="Light Intensity Shower Rain" className="w-6 h-6" />,
+  'shower rain': <img src={rain.src} alt="Shower Rain" className="w-6 h-6" />,
+  'heavy intensity shower rain': <img src={heavyRain.src} alt="Heavy Intensity Shower Rain" className="w-6 h-6" />,
+  'ragged shower rain': <img src={rain.src} alt="Ragged Shower Rain" className="w-6 h-6" />,
 
   // Nieve
-  'light snow': <img src={lightSnow.src} alt="Light Snow" className="w-5 h-5" />,
-  'snow': <img src={snow.src} alt="Snow" className="w-5 h-5" />,
-  'heavy snow': <img src={snow.src} alt="Heavy Snow" className="w-5 h-5" />,
-  'sleet': <img src={snow.src} alt="Sleet" className="w-5 h-5" />,
-  'light shower sleet': <img src={snow.src} alt="Light Shower Sleet" className="w-5 h-5" />,
-  'shower sleet': <img src={snow.src} alt="Shower Sleet" className="w-5 h-5" />,
-  'light rain and snow': <img src={partlyCloudyWithRain.src} alt="Light Rain and Snow" className="w-5 h-5" />,
-  'rain and snow': <img src={rain.src} alt="Rain and Snow" className="w-5 h-5" />,
-  'light shower snow': <img src={lightSnow.src} alt="Light Shower Snow" className="w-5 h-5" />,
-  'shower snow': <img src={snow.src} alt="Shower Snow" className="w-5 h-5" />,
-  'heavy shower snow': <img src={snow.src} alt="Heavy Shower Snow" className="w-5 h-5" />,
+  'light snow': <img src={lightSnow.src} alt="Light Snow" className="w-6 h-6" />,
+  'snow': <img src={snow.src} alt="Snow" className="w-6 h-6" />,
+  'heavy snow': <img src={snow.src} alt="Heavy Snow" className="w-6 h-6" />,
+  'sleet': <img src={snow.src} alt="Sleet" className="w-6 h-6" />,
+  'light shower sleet': <img src={snow.src} alt="Light Shower Sleet" className="w-6 h-6" />,
+  'shower sleet': <img src={snow.src} alt="Shower Sleet" className="w-6 h-6" />,
+  'light rain and snow': <img src={partlyCloudyWithRain.src} alt="Light Rain and Snow" className="w-6 h-6" />,
+  'rain and snow': <img src={rain.src} alt="Rain and Snow" className="w-6 h-6" />,
+  'light shower snow': <img src={lightSnow.src} alt="Light Shower Snow" className="w-6 h-6" />,
+  'shower snow': <img src={snow.src} alt="Shower Snow" className="w-6 h-6" />,
+  'heavy shower snow': <img src={snow.src} alt="Heavy Shower Snow" className="w-6 h-6" />,
 
   // Atmósfera
-  'mist': <img src={foggyDay.src} alt="Mist" className="w-5 h-5" />,
-  'smoke': <img src={foggyDay.src} alt="Smoke" className="w-5 h-5" />,
-  'haze': <img src={foggyDay.src} alt="Haze" className="w-5 h-5" />,
-  'sand/dust whirls': <img src={foggyDay.src} alt="Sand/Dust Whirls" className="w-5 h-5" />,
-  'fog': <img src={foggyDay.src} alt="Fog" className="w-5 h-5" />,
-  'sand': <img src={foggyDay.src} alt="Sand" className="w-5 h-5" />,
-  'dust': <img src={foggyDay.src} alt="Dust" className="w-5 h-5" />,
+  'mist': <img src={foggyDay.src} alt="Mist" className="w-6 h-6" />,
+  'smoke': <img src={foggyDay.src} alt="Smoke" className="w-6 h-6" />,
+  'haze': <img src={foggyDay.src} alt="Haze" className="w-6 h-6" />,
+  'sand/dust whirls': <img src={foggyDay.src} alt="Sand/Dust Whirls" className="w-6 h-6" />,
+  'fog': <img src={foggyDay.src} alt="Fog" className="w-6 h-6" />,
+  'sand': <img src={foggyDay.src} alt="Sand" className="w-6 h-6" />,
+  'dust': <img src={foggyDay.src} alt="Dust" className="w-6 h-6" />,
   'volcanic ash': <img src={foggyDay.src} alt="Volcanic Ash" className="w-5 h-5" />,
-  'squalls': <img src={windy.src} alt="Squalls" className="w-5 h-5" />,
-  'tornado': <img src={windy.src} alt="Tornado" className="w-5 h-5" />,
+  'squalls': <img src={windy.src} alt="Squalls" className="w-6 h-6" />,
+  'tornado': <img src={windy.src} alt="Tornado" className="w-6 h-6" />,
 
   // Despejado
-  'clear sky': <img src={clearSky.src} alt="Clear Sky" className="w-5 h-5" />,
+  'clear sky': <img src={clearSky.src} alt="Clear Sky" className="w-6 h-6" />,
 
   // Nubes
-  'few clouds': <img src={fewClouds.src} alt="Few Clouds (11-25%)" className="w-5 h-5" />,
-  'scattered clouds': <img src={partlyCloudy.src} alt="Scattered Clouds (25-50%)" className="w-5 h-5" />,
-  'broken clouds': <img src={partlyCloudy.src} alt="Broken Clouds (51-84%)" className="w-5 h-5" />,
-  'overcast clouds': <img src={overcast.src} alt="Broken Clouds (51-84%)" className="w-5 h-5" />,
+  'few clouds': <img src={fewClouds.src} alt="Few Clouds (11-25%)" className="w-6 h-6" />,
+  'scattered clouds': <img src={partlyCloudy.src} alt="Scattered Clouds (25-50%)" className="w-6 h-6" />,
+  'broken clouds': <img src={partlyCloudy.src} alt="Broken Clouds (51-84%)" className="w-6 h-6" />,
+  'overcast clouds': <img src={overcast.src} alt="Broken Clouds (51-84%)" className="w-6 h-6" />,
 };
 
 export default function Home() {
@@ -226,7 +223,7 @@ export default function Home() {
       <div className="w-full lg:w-2/6 space-y-4">
         <article className="rounded-lg p-6">
           <header className="flex items-center justify-between">
-            <h1 className="text-8xl font-semibold text-white">{temperatureInCelsius}°</h1>
+            <h1 className="text-7xl font-semibold text-white">{temperatureInCelsius}°</h1>
                {/*{currentIcon} Icono más grande */}
                {weather.description ? (
                 <WeatherGif description={weather.description as WeatherDescriptions}/>
@@ -240,12 +237,12 @@ export default function Home() {
               {cityName}
               <FaLocationDot size={15} className="ml-2" /> {/* Alineado con el texto */}
             </p>
-            <form onSubmit={handleSearch} className="flex items-center border border-teal-300/50 rounded-lg overflow-hidden w-80">
+            <form onSubmit={handleSearch} className="flex items-center border border-teal-300/50 rounded-lg overflow-hidden w-full  lg:w-80 lg:max-w-none ">
               <input
                 type="text"
                 name="city"
                 placeholder="Search location"
-                className="px-2 py-1 border-none outline-none w-full text-teal-800"
+                className="px-2 py-1 border-none outline-none  w-full text-teal-800"
               />
               <button type="submit" className="bg-teal-600/80 text-teal-100 px-4 py-1 hover:bg-teal-600">
                 Search
@@ -266,15 +263,15 @@ export default function Home() {
           <article className="bg-teal-600/50 rounded-lg p-6">
               <ul className="grid grid-cols-4 gap-4">
                 {/* Encabezados de columna */}
-                <li className="font-semibold text-white flex justify-start">Day</li>
-                <li className="font-semibold text-white flex justify-center">Precipitation</li>
-                <li className="font-semibold text-white flex justify-center">Visual</li>
-                <li className="font-semibold text-white flex justify-end">Temperature</li>
+                <li className="font-semibold text-white flex justify-start hidden lg:block">Day</li>
+                <li className="font-semibold text-white flex justify-center  hidden lg:block">Precipitation</li>
+                <li className="font-semibold text-white flex justify-center  hidden lg:block">Visual</li>
+                <li className="font-semibold text-white flex justify-end  hidden lg:block">Temperature</li>
 
                 {/* Datos */}
                 {weather.dailyForecasts.map((forecast) => {
                   const dayName = new Date(forecast.date).toLocaleDateString('en-US', { weekday: 'long' });
-                  const icon = iconMaps[forecast.description.toLowerCase() as WeatherDescriptions] || <IoCloudy className="w-5 h-5" />;
+                  const icon = iconMaps[forecast.description.toLowerCase() as WeatherDescriptions] || <IoWater className="w-5 h-5" />;
 
                   return (
                     <>

@@ -141,7 +141,7 @@ export default function WeatherGif({ description }: GifProviderProps) {
   return (
     <div>
         {gif ? (
-        <img src={gif.src} alt={description} className="w-56 h-56" />
+        <img src={gif.src} alt={description} className="w-48 h-48" />
         ) : (
         <p>No GIF available</p>
         )}
