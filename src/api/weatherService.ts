@@ -1,5 +1,9 @@
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-const apiKey = process.env.API_KEY;
+const cleanEnvVariable = (variable: string | undefined): string => {
+    return (variable || '').trim().replace(/;$/, '');
+  };
+  
+  const apiUrl = cleanEnvVariable(process.env.NEXT_PUBLIC_API_URL);
+  const apiKey = cleanEnvVariable(process.env.API_KEY);
 
 export interface WeatherDTO {
     id: number;
@@ -23,17 +27,16 @@ interface DailyForecast {
     cloudCover: number; // Cantidad de nubes en porcentaje
     pop: number; // Probabilidad de precipitación en porcentaje
 }
-
 export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> => {
     try {
 
-        //console.log('API_URL:', apiUrl);
-        //console.log('API_KEY:', apiKey);
+        console.log('API_URL:', apiUrl);
+        console.log('API_KEY:', apiKey);
         const response = await fetch(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`);
 
          // Log the response URL and status
-         //console.log('Response URL:', response.url);
-         //console.log('Response Status:', response.status);
+         console.log('Response URL:', response.url);
+         console.log('Response Status:', response.status);
         if (!response.ok) {
             const errorDetails = await response.json();
             throw new Error(errorDetails.message || 'Failed to fetch weather data');

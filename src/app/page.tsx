@@ -5,31 +5,23 @@ import { FaLocationDot } from "react-icons/fa6";
 import { GiWaterDrop } from "react-icons/gi";
 import Footer from '@/components/Footer';
 import { getWeatherByCity, WeatherDTO } from '../api/weatherService';
-import clearSky from '../assets/clear_sky.png'
-import fewClouds from '../assets/few_clouds.png'
-import cloudyWithLightning from '../assets/cloudy_with_lightning.png'
-import foggyDay from '../assets/foggy_day.png'
-import heavyRain from '../assets/heavy_rain.png'
-import lightRain from '../assets/light_rain.png'
-import lightSnow from '../assets/light_snow.png'
-import overcast from '../assets/overcast.png'
-import partlyCloudy from '../assets/partly_cloudy.png'
-import partlyCloudyWithRain from '../assets/partly_cloudy_with_rain.png'
-import rain from '../assets/rain.png'
-import snow from '../assets/snow.png'
-import thunderstorm from '../assets/thunderstorm.png'
-import windy from '../assets/windy.png'
+import clearSky from '../../public/assets/clear_sky.png'
+import fewClouds from '../../public/assets/few_clouds.png'
+import cloudyWithLightning from '../../public/assets/cloudy_with_lightning.png'
+import foggyDay from '../../public/assets/foggy_day.png'
+import heavyRain from '../../public/assets/heavy_rain.png'
+import lightRain from '../../public/assets/light_rain.png'
+import lightSnow from '../../public/assets/light_snow.png'
+import overcast from '../../public/assets/overcast.png'
+import partlyCloudy from '../../public/assets/partly_cloudy.png'
+import partlyCloudyWithRain from '../../public/assets/partly_cloudy_with_rain.png'
+import rain from '../../public/assets/rain.png'
+import snow from '../../public/assets/snow.png'
+import thunderstorm from '../../public/assets/thunderstorm.png'
+import windy from '../../public/assets/windy.png'
+import luna from '../../public/assets/luna.png'
+import moon from '../../public/assets/moon.png'
 
-import clearSkyGif from '../assets/clear_sky.svg'
-import heavyRainGif from '../assets/heavy_rain.svg'
-import lightRainGif from '../assets/light_rain.svg'
-import overcastGif from '../assets/overcast.svg'
-import partlyCloudyGif from '../assets/partly_cloudy.svg'
-import snowGif from '../assets/snow.svg'
-import thunderstormGif from '../assets/thunderstorm.svg'
-
-import luna from '../assets/luna.png'
-import moon from '../assets/moon.png'
 import {
   IoCloudy, // Nublado
   IoWater, // Agua para Humedad
@@ -37,6 +29,7 @@ import {
 import { FaWind } from "react-icons/fa6";// para viento
 import { GiStripedSun } from "react-icons/gi";// para UV Index
 import { BsThermometerSun } from "react-icons/bs";
+import WeatherGif from '../components/WeatherGif';
 
   type WeatherDescriptions =
   // Grupo 2xx: Tormentas
@@ -174,145 +167,6 @@ const iconMaps: { [key in WeatherDescriptions]: JSX.Element } = {
   'overcast clouds': <img src={overcast.src} alt="Broken Clouds (51-84%)" className="w-5 h-5" />,
 };
 
-const iconMap: { [key in WeatherDescriptions]: JSX.Element } = {
-  // Tormentas
-  'thunderstorm with light rain': <img src={thunderstormGif} alt="Thunderstorm with Light Rain" className="w-56 h-56" />,
-  'thunderstorm with rain': <img src={thunderstormGif} alt="Thunderstorm with Rain" className="w-56 h-56" />,
-  'thunderstorm with heavy rain': <img src={thunderstormGif} alt="Thunderstorm with Heavy Rain" className="w-56 h-56" />,
-  'light thunderstorm': <img src={thunderstormGif} alt="Light Thunderstorm" className="w-56 h-56" />,
-  'thunderstorm': <img src={thunderstormGif} alt="Thunderstorm" className="w-56 h-56" />,
-  'heavy thunderstorm': <img src={thunderstormGif} alt="Heavy Thunderstorm" className="w-56 h-56" />,
-  'ragged thunderstorm': <img src={thunderstormGif} alt="Ragged Thunderstorm" className="w-56 h-56" />,
-  'thunderstorm with light drizzle': <img src={thunderstormGif} alt="Thunderstorm with Light Drizzle" className="w-56 h-56" />,
-  'thunderstorm with drizzle': <img src={thunderstormGif} alt="Thunderstorm with Drizzle" className="w-56 h-56" />,
-  'thunderstorm with heavy drizzle': <img src={thunderstormGif} alt="Thunderstorm with Heavy Drizzle" className="w-56 h-56" />,
-
-  // Llovizna
-  'light intensity drizzle': <img src={lightRainGif} alt="Light Intensity Drizzle" className="w-56 h-56" />,
-  'drizzle': <img src={lightRainGif} alt="Drizzle" className="w-56 h-56" />,
-  'heavy intensity drizzle': <img src={lightRainGif} alt="Heavy Intensity Drizzle" className="w-56 h-56" />,
-  'light intensity drizzle rain': <img src={lightRainGif} alt="Light Intensity Drizzle Rain" className="w-56 h-56" />,
-  'drizzle rain': <img src={lightRainGif} alt="Drizzle Rain" className="w-56 h-56" />,
-  'heavy intensity drizzle rain': <img src={heavyRainGif} alt="Heavy Intensity Drizzle Rain" className="w-56 h-56" />,
-  'shower rain and drizzle': <img src={lightRainGif} alt="Shower Rain and Drizzle" className="w-56 h-56" />,
-  'heavy shower rain and drizzle': <img src={heavyRainGif} alt="Heavy Shower Rain and Drizzle" className="w-56 h-56" />,
-  'shower drizzle': <img src={lightRainGif} alt="Shower Drizzle" className="w-56 h-56" />,
-
-  // Lluvia
-  'light rain': <img src={lightRainGif} alt="Light Rain" className="w-56 h-56" />,
-  'moderate rain': <img src={lightRainGif} alt="Moderate Rain" className="w-56 h-56" />,
-  'heavy intensity rain': <img src={heavyRainGif} alt="Heavy Intensity Rain" className="w-56 h-56" />,
-  'very heavy rain': <img src={heavyRainGif} alt="Very Heavy Rain" className="w-56 h-56" />,
-  'extreme rain': <img src={heavyRainGif} alt="Extreme Rain" className="w-56 h-56" />,
-  'freezing rain': <img src={snowGif} alt="Freezing Rain" className="w-56 h-56" />,
-  'light intensity shower rain': <img src={lightRainGif} alt="Light Intensity Shower Rain" className="w-56 h-56" />,
-  'shower rain': <img src={lightRainGif} alt="Shower Rain" className="w-56 h-56" />,
-  'heavy intensity shower rain': <img src={heavyRainGif} alt="Heavy Intensity Shower Rain" className="w-56 h-56" />,
-  'ragged shower rain': <img src={heavyRainGif} alt="Ragged Shower Rain" className="w-56 h-56" />,
-
-  // Nieve
-  'light snow': <img src={snowGif} alt="Light Snow" className="w-56 h-56" />,
-  'snow': <img src={snowGif} alt="Snow" className="w-56 h-56" />,
-  'heavy snow': <img src={snowGif} alt="Heavy Snow" className="w-56 h-56" />,
-  'sleet': <img src={snowGif} alt="Sleet" className="w-56 h-56" />,
-  'light shower sleet': <img src={snowGif} alt="Light Shower Sleet" className="w-56 h-56" />,
-  'shower sleet': <img src={snowGif} alt="Shower Sleet" className="w-56 h-56" />,
-  'light rain and snow': <img src={snowGif} alt="Light Rain and Snow" className="w-56 h-56" />,
-  'rain and snow': <img src={snowGif} alt="Rain and Snow" className="w-56 h-56" />,
-  'light shower snow': <img src={snowGif} alt="Light Shower Snow" className="w-56 h-56" />,
-  'shower snow': <img src={snowGif} alt="Shower Snow" className="w-56 h-56" />,
-  'heavy shower snow': <img src={snowGif} alt="Heavy Shower Snow" className="w-56 h-56" />,
-
-  // Atmosfera
-  'mist': <img src={overcastGif} alt="Mist" className="w-56 h-56" />,
-  'smoke': <img src={overcastGif} alt="Smoke" className="w-56 h-56" />,
-  'haze': <img src={overcastGif} alt="Haze" className="w-56 h-56" />,
-  'sand/dust whirls': <img src={overcastGif} alt="Sand/Dust Whirls" className="w-56 h-56" />,
-  'fog': <img src={overcastGif} alt="Fog" className="w-56 h-56" />,
-  'sand': <img src={overcastGif} alt="Sand" className="w-56 h-56" />,
-  'dust': <img src={overcastGif} alt="Dust" className="w-56 h-56" />,
-  'volcanic ash': <img src={overcastGif} alt="Volcanic Ash" className="w-56 h-56" />,
-  'squalls': <img src={overcastGif} alt="Squalls" className="w-56 h-56" />,
-  'tornado': <img src={thunderstormGif} alt="Tornado" className="w-56 h-56" />,
-
-  // Cielo
-  'clear sky': <img src={clearSkyGif} alt="Clear Sky" className="w-56 h-56" />,
-  'few clouds': <img src={partlyCloudyGif} alt="Few Clouds" className="w-56 h-56" />,
-  'scattered clouds': <img src={partlyCloudyGif} alt="Scattered Clouds" className="w-56 h-56" />,
-  'broken clouds': <img src={partlyCloudyGif} alt="Broken Clouds" className="w-56 h-56" />,
-  'overcast clouds': <img src={overcastGif} alt="Overcast Clouds" className="w-56 h-56" />,
-};
-const weatherGifs: { [key in WeatherDescriptions]: string } = {
-  // Tormentas
-  'thunderstorm with light rain': thunderstormGif,
-  'thunderstorm with rain': thunderstormGif,
-  'thunderstorm with heavy rain': thunderstormGif,
-  'light thunderstorm': thunderstormGif,
-  'thunderstorm': thunderstormGif,
-  'heavy thunderstorm': thunderstormGif,
-  'ragged thunderstorm': thunderstormGif,
-  'thunderstorm with light drizzle': thunderstormGif,
-  'thunderstorm with drizzle': thunderstormGif,
-  'thunderstorm with heavy drizzle': thunderstormGif,
-
-  // Llovizna
-  'light intensity drizzle': lightRainGif,
-  'drizzle': lightRainGif,
-  'heavy intensity drizzle': lightRainGif,
-  'light intensity drizzle rain': lightRainGif,
-  'drizzle rain': lightRainGif,
-  'heavy intensity drizzle rain': heavyRainGif,
-  'shower rain and drizzle': lightRainGif,
-  'heavy shower rain and drizzle': heavyRainGif,
-  'shower drizzle': lightRainGif,
-
-  // Lluvia
-  'light rain': lightRainGif,
-  'moderate rain': lightRainGif,
-  'heavy intensity rain': heavyRainGif,
-  'very heavy rain': heavyRainGif,
-  'extreme rain': heavyRainGif,
-  'freezing rain': snowGif,
-  'light intensity shower rain': lightRainGif,
-  'shower rain': lightRainGif,
-  'heavy intensity shower rain': heavyRainGif,
-  'ragged shower rain': heavyRainGif,
-
-  // Nieve
-  'light snow': snowGif,
-  'snow': snowGif,
-  'heavy snow': snowGif,
-  'sleet': snowGif,
-  'light shower sleet': snowGif,
-  'shower sleet': snowGif,
-  'light rain and snow': snowGif,
-  'rain and snow': snowGif,
-  'light shower snow': snowGif,
-  'shower snow': snowGif,
-  'heavy shower snow': snowGif,
-
-  // Atmosfera
-  'mist': overcastGif,
-  'smoke': overcastGif,
-  'haze': overcastGif,
-  'sand/dust whirls': overcastGif,
-  'fog': overcastGif,
-  'sand': overcastGif,
-  'dust': overcastGif,
-  'volcanic ash': overcastGif,
-  'squalls': overcastGif,
-  'tornado': thunderstormGif,
-
-  // Cielo
-  'clear sky': clearSkyGif,
-  'few clouds': partlyCloudyGif,
-  'scattered clouds': partlyCloudyGif,
-  'broken clouds': partlyCloudyGif,
-  'overcast clouds': overcastGif,
-};
-
-
-
 export default function Home() {
   const [weather, setWeather] = useState<WeatherDTO | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -363,8 +217,7 @@ export default function Home() {
   const temperatureInCelsius = Math.round(weather.temperature);
 
   // Obtén el ícono animated según la descripción del clima.
-  const gifUrl = weatherGifs[weather.description as WeatherDescriptions];
-  const currentIcon = iconMap[weather.description.toLowerCase() as WeatherDescriptions] || <IoCloudy className="w-56 h-56 text-gray-200" />;
+  //const currentIcon = iconMap[weather.description.toLowerCase() as WeatherDescriptions] || <IoCloudy className="w-56 h-56 text-gray-200" />;
 
   return (
     <section className="min-h-screen bg-teal-300/80 flex justify-center items-center p-4">
@@ -373,7 +226,11 @@ export default function Home() {
           <header className="flex items-center justify-between">
             <h1 className="text-8xl font-semibold text-white">{temperatureInCelsius}°</h1>
                {/*{currentIcon} Icono más grande */}
-               {gifUrl && <img src={gifUrl.src} alt={weather.description} className="w-56 h-56" />}
+               {weather.description ? (
+                <WeatherGif description={weather.description as WeatherDescriptions}/>
+              ) : (
+                <IoCloudy className="w-56 h-56 text-gray-200" />
+              )}
           </header>
           <p className="text-xl text-white mt-2 capitalize ">{weather.description}</p>
           <div className="mt-2">
