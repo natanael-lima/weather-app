@@ -11,6 +11,7 @@ export interface WeatherDTO {
     feelsLike: number;
     tempMin: number;
     tempMax: number;
+    windSpeed: number; // Velocidad del viento en km/h
     dailyForecasts: Array<DailyForecast>;
 }
 
@@ -19,8 +20,8 @@ interface DailyForecast {
     tempMin: number;
     tempMax: number;
     description: string;
-    cloudCover: number;
-    pop: number; // Añade esta línea
+    cloudCover: number; // Cantidad de nubes en porcentaje
+    pop: number; // Probabilidad de precipitación en porcentaje
 }
 
 export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> => {
@@ -28,13 +29,11 @@ export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> =>
 
         //console.log('API_URL:', apiUrl);
         //console.log('API_KEY:', apiKey);
-
         const response = await fetch(`${apiUrl}?q=${cityName}&appid=${apiKey}&units=metric`);
 
          // Log the response URL and status
          //console.log('Response URL:', response.url);
          //console.log('Response Status:', response.status);
-
         if (!response.ok) {
             const errorDetails = await response.json();
             throw new Error(errorDetails.message || 'Failed to fetch weather data');
@@ -48,6 +47,10 @@ export const getWeatherByCity = async (cityName: string): Promise<WeatherDTO> =>
     }
 };
 
+// Función para convertir metros por segundo a kilómetros por hora
+const convertWindSpeedToKmh = (speed: number): number => {
+    return speed * 3.6;
+  };
 const transformToWeatherDTO = (data: any): WeatherDTO => {
     // Define the structure of the accumulator object
     const forecasts: Record<string, DailyForecast> = {};
@@ -83,6 +86,7 @@ const transformToWeatherDTO = (data: any): WeatherDTO => {
         feelsLike: data.list[0].main.feels_like,
         tempMin: Math.min(...data.list.map((item: any) => item.main.temp_min)),
         tempMax: Math.max(...data.list.map((item: any) => item.main.temp_max)),
+        windSpeed: convertWindSpeedToKmh(data.list[0].wind.speed), // Obtener la velocidad del viento del primer elemento
         dailyForecasts,
     };
 };
