@@ -30,6 +30,8 @@ import { FaWind } from "react-icons/fa6";// para viento
 import { GiStripedSun } from "react-icons/gi";// para UV Index
 import { BsThermometerSun } from "react-icons/bs";
 import WeatherGif from '../components/WeatherGif';
+import { debugEnvVariables } from '@/api/debugEnvVariables';
+
 
   type WeatherDescriptions =
   // Grupo 2xx: Tormentas
