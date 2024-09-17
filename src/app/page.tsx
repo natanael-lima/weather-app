@@ -263,10 +263,10 @@ export default function Home() {
           <article className="bg-teal-600/50 rounded-lg p-6">
               <ul className="grid grid-cols-4 gap-4">
                 {/* Encabezados de columna */}
-                <li className="font-semibold text-white flex justify-start hidden lg:block">Day</li>
-                <li className="font-semibold text-white flex justify-center  hidden lg:block">Precipitation</li>
-                <li className="font-semibold text-white flex justify-center  hidden lg:block">Visual</li>
-                <li className="font-semibold text-white flex justify-end  hidden lg:block">Temperature</li>
+                <li className="font-semibold text-white lg:flex lg:justify-start hidden lg:block">Day</li>
+                <li className="font-semibold text-white lg:flex lg:justify-center hidden lg:block">Precipitation</li>
+                <li className="font-semibold text-white lg:flex lg:justify-center  hidden lg:block ">Visual</li>
+                <li className="font-semibold text-white lg:flex lg:justify-end hidden lg:block">Temperature</li>
 
                 {/* Datos */}
                 {weather.dailyForecasts.map((forecast) => {
@@ -306,23 +306,23 @@ export default function Home() {
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
               <BsThermometerSun className="w-8 h-8 text-white mb-2" />
-              <h2 className="text-lg font-semibold text-white">Feels like</h2>
-              <p className="text-2xl text-white">{Math.round(weather.feelsLike)}°C</p>
+              <h2 className="text-md font-semibold text-white">Feels like</h2>
+              <p className="text-lg text-teal-50/80">{Math.round(weather.feelsLike)}°C</p>
             </li>
             <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
               <IoWater className="w-8 h-8 text-white mb-2" />
-              <h2 className="text-lg font-semibold text-white">Humidity</h2>
-              <p className="text-2xl text-white">{weather.humidity}%</p>
+              <h2 className="text-md font-semibold text-white">Humidity</h2>
+              <p className="text-lg text-teal-50/80">{weather.humidity}%</p>
             </li>
             <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
               <FaWind className="w-8 h-8 text-white mb-2" />
-              <h2 className="text-lg font-semibold text-white">Wind</h2>
-              <p className="text-2xl text-white">{weather.windSpeed} <span className='text-teal-100/60 text-sm'>km/h</span></p>
+              <h2 className="text-md font-semibold text-white">Wind</h2>
+              <p className="text-lg text-teal-50/80">{Math.round(weather.windSpeed)}<span className='text-teal-100/60 text-sm'> km/h</span></p>
             </li>
             <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
               <GiStripedSun className="w-8 h-8 text-white mb-2" />
-              <h2 className="text-lg font-semibold text-white">UV Index</h2>
-              <p className="text-2xl text-white">N/A</p> {/* No UV index in current data */}
+              <h2 className="text-md font-semibold text-white">UV Index</h2>
+              <p className="text-lg text-teal-50/80">N/A</p> {/* No UV index in current data */}
             </li>
           </ul>
         </section>
