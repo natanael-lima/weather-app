@@ -219,7 +219,7 @@ export default function Home() {
   //const currentIcon = iconMap[weather.description.toLowerCase() as WeatherDescriptions] || <IoCloudy className="w-56 h-56 text-gray-200" />;
 
   return (
-    <section className="min-h-screen bg-teal-300/80 flex justify-center items-center p-4">
+    <section className="min-h-screen bg-cyan-800/40 flex justify-center items-center p-4">
       <div className="w-full lg:w-2/6 space-y-4">
         <article className="rounded-lg p-6">
           <header className="flex items-center justify-between">
@@ -237,19 +237,19 @@ export default function Home() {
               {cityName}
               <FaLocationDot size={15} className="ml-2" /> {/* Alineado con el texto */}
             </p>
-            <form onSubmit={handleSearch} className="flex items-center border border-teal-300/50 rounded-lg overflow-hidden w-full  lg:w-80 lg:max-w-none ">
+            <form onSubmit={handleSearch} className="flex items-center border border-cyan-300/30 rounded-lg overflow-hidden w-full  lg:w-80 lg:max-w-none ">
               <input
                 type="text"
                 name="city"
                 placeholder="Search location"
-                className="px-2 py-1 border-none outline-none  w-full text-teal-800"
+                className="px-2 py-1 border-none outline-none  w-full text-cyan-800"
               />
-              <button type="submit" className="bg-teal-600/80 text-teal-100 px-4 py-1 hover:bg-teal-600">
+              <button type="submit" className="bg-cyan-900/30 text-teal-100 px-4 py-1 hover:bg-cyan-600">
                 Search
               </button>
             </form>
               {error && (
-                <div className="text-red-500 mt-4 p-4 bg-red-100 rounded-lg border border-red-300">
+                <div className="text-red-500 mt-4 p-4 bg-cyan-100 rounded-lg border border-cyan-100">
                   {error}
                 </div>
               )}
@@ -260,7 +260,7 @@ export default function Home() {
           </div>
         </article>
         <section>
-          <article className="bg-teal-600/50 rounded-lg p-6">
+          <article className="bg-cyan-900/30 rounded-lg p-6">
               <ul className="grid grid-cols-4 gap-4">
                 {/* Encabezados de columna */}
                 <li className="font-semibold text-white lg:flex lg:justify-start hidden lg:block">Day</li>
@@ -304,22 +304,22 @@ export default function Home() {
 
         <section>
           <ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
+          <li className="bg-cyan-900/30 rounded-lg p-4 flex flex-col items-center">
               <BsThermometerSun className="w-8 h-8 text-white mb-2" />
               <h2 className="text-md font-semibold text-white">Feels like</h2>
               <p className="text-lg text-teal-50/80">{Math.round(weather.feelsLike)}°C</p>
             </li>
-            <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
+            <li className="bg-cyan-900/30 rounded-lg p-4 flex flex-col items-center">
               <IoWater className="w-8 h-8 text-white mb-2" />
               <h2 className="text-md font-semibold text-white">Humidity</h2>
               <p className="text-lg text-teal-50/80">{weather.humidity}%</p>
             </li>
-            <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
+            <li className="bg-cyan-900/30 rounded-lg p-4 flex flex-col items-center">
               <FaWind className="w-8 h-8 text-white mb-2" />
               <h2 className="text-md font-semibold text-white">Wind</h2>
               <p className="text-lg text-teal-50/80">{Math.round(weather.windSpeed)}<span className='text-teal-100/60 text-sm'> km/h</span></p>
             </li>
-            <li className="bg-teal-600/50 rounded-lg p-4 flex flex-col items-center">
+            <li className="bg-cyan-900/30 rounded-lg p-4 flex flex-col items-center">
               <GiStripedSun className="w-8 h-8 text-white mb-2" />
               <h2 className="text-md font-semibold text-white">UV Index</h2>
               <p className="text-lg text-teal-50/80">N/A</p> {/* No UV index in current data */}
